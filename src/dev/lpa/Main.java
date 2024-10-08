@@ -1,10 +1,7 @@
 package dev.lpa;
 
 import java.time.LocalDate;
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.NavigableMap;
-import java.util.TreeMap;
+import java.util.*;
 
 public class Main {
 
@@ -22,10 +19,27 @@ public class Main {
     addPurchase("Joe Jones", jmc, 149.99);
     addPurchase("Bill Brown", python, 119.99);
 
+    addPurchase("Chuck Cheese", python, 119.99);
+    addPurchase("Davey Jones", jmc, 139.99);
+    addPurchase("Eva East", python, 139.99);
+    addPurchase("Fred Forker", jmc, 139.99);
+    addPurchase("Greg Brandy", python, 129.99);
+
     purchases.forEach((key, value) -> System.out.println(key + ": " + value));
     System.out.println("----------------------------------------------------");
     students.forEach((key, value) -> System.out.println(key + ": " + value));
 
+    NavigableMap<LocalDate, List<Purchase>> datedPurchases = new TreeMap<>();
+
+    for (Purchase p : purchases.values()) {
+      datedPurchases.compute(p.purchaseDate(), (pdate, plist) -> {
+        List<Purchase> list = (plist == null) ? new ArrayList<>() : plist;
+        list.add(p);
+        return list;
+      });
+    }
+
+    datedPurchases.forEach((key, value) -> System.out.println(key + ": " + value));
   }
 
   private static void addPurchase(String name, Course course, double price) {
@@ -38,7 +52,7 @@ public class Main {
       existingStudent.addCourse(course);
     }
 
-    int day = purchases.size() + 1;
+    int day = new Random().nextInt(1, 15);
     String key = course.courseId() + "_" + existingStudent.getId();
     int year = LocalDate.now().getYear();
     Purchase purchase = new Purchase(course.courseId(), existingStudent.getId(), price, year, day);
