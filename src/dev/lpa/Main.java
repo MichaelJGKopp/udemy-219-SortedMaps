@@ -81,7 +81,7 @@ public class Main {
 
     LocalDate firstDate = reversed.firstKey();
 //    var nextEntry = reversed.firstEntry();
-    var nextEntry = reversed.firstEntry();
+    var nextEntry = reversed.pollFirstEntry();
 
     while (nextEntry != null) {
       List<Purchase> lastDaysData = nextEntry.getValue();
@@ -89,7 +89,7 @@ public class Main {
 
       LocalDate nextDate = reversed.higherKey(firstDate);
 //      nextEntry = reversed.higherEntry(firstDate);
-      nextEntry = reversed.higherEntry(firstDate);
+      nextEntry = reversed.pollFirstEntry();
       firstDate = nextDate;
     }
     System.out.println("--------------------------------------");
