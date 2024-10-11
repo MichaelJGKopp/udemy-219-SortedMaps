@@ -50,14 +50,17 @@ public class Main {
     Map<LocalDate, List<Purchase>> week2Purchases2 = datedPurchases.subMap(week1, week2);
     var week2Purchases = datedPurchases.tailMap(week1);
 
-    System.out.println("-----------------------------------------------");
-    week1Purchases.forEach((k, v) -> System.out.println(k + ": " + v));
+//    System.out.println("-----------------------------------------------");
+//    week1Purchases.forEach((k, v) -> System.out.println(k + ": " + v));
+//
+//    System.out.println("-----------------------------------------------");
+//    week2Purchases.forEach((k, v) -> System.out.println(k + ": " + v));
+//
+//    System.out.println("-----------------------------------------------");
+//    week2Purchases2.forEach((k, v) -> System.out.println(k + ": " + v));
 
-    System.out.println("-----------------------------------------------");
-    week2Purchases.forEach((k, v) -> System.out.println(k + ": " + v));
-
-    System.out.println("-----------------------------------------------");
-    week2Purchases2.forEach((k, v) -> System.out.println(k + ": " + v));
+    displayStats(1, week1Purchases);
+    displayStats(2, week2Purchases);
   }
 
   private static void addPurchase(String name, Course course, double price) {
