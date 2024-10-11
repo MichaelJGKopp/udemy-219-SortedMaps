@@ -61,6 +61,21 @@ public class Main {
 
     displayStats(1, week1Purchases);
     displayStats(2, week2Purchases);
+
+    System.out.println("-------------------------------");
+
+    LocalDate lastDate = datedPurchases.lastKey();
+    var previousEntry = datedPurchases.lastEntry();
+
+    while (previousEntry != null) {
+      List<Purchase> lastDaysData = previousEntry.getValue();
+      System.out.println(lastDate + " purchases : " + lastDaysData.size());
+
+      LocalDate prevDate = datedPurchases.lowerKey(lastDate);
+      previousEntry = datedPurchases.lowerEntry(lastDate);
+      lastDate = prevDate;
+    }
+
   }
 
   private static void addPurchase(String name, Course course, double price) {
